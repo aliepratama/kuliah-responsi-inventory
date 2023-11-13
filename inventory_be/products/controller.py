@@ -53,10 +53,53 @@ def get_all_products():
         }])
         
 def get_product(id: int):
-    return ''
+    try:
+        return response.ok([], 'Berhasil')
+    except Exception as e:
+        print(e)
+        return response.bad_request([{
+            'message': 'Unknown Issues!',
+            'code': 37,
+            'field': []
+        }])
         
 def edit_product(id: int):
-    return ''
+    try:
+        try:
+            nama_produk = request.form['nama_produk']
+            stok = request.form['stok']
+            harga = request.form['harga']
+            deskripsi = request.form['deskripsi']
+            kategori = request.form['kategori']
+        except Exception as e:
+            print(e)
+            return response.bad_request([{
+                'message': 'Please check your data!',
+                'code': 35,
+                'field': ['nama_produk', 'stok', 'harga', 'deskripsi', 'kategori']
+            }])
+        if all((nama_produk, stok, harga, kategori)):
+            return response.success('Berhasil menghapus data!')
+        return response.bad_request([{
+            'message': 'Please check your data!',
+            'code': 35,
+            'field': ['nama_produk', 'stok', 'harga', 'deskripsi', 'kategori']
+        }])
+    except Exception as e:
+        print(e)
+        return response.bad_request([{
+            'message': 'Please check your data!',
+            'code': 36,
+            'field': ['nama_produk', 'stok', 'harga', 'deskripsi', 'kategori']
+        }])
         
 def delete_product(id: int):
-    return ''
+    try:
+        return response.success('Berhasil menghapus data!')
+    except Exception as e:
+        print(e)
+        return response.bad_request([{
+            'message': 'Please check your data!',
+            'code': 36,
+            'field': ['nama_produk', 'stok', 'harga', 'deskripsi', 'kategori']
+        }])
