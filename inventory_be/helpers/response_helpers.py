@@ -1,5 +1,4 @@
 from flask import jsonify, make_response
-print('REF>>>>>>>>>>>', __name__)
 
 
 def ok(data: any, message: str) -> any:
