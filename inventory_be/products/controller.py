@@ -20,6 +20,7 @@ def add_product():
         if all((nama_produk, stok, harga, kategori)):
             return response.ok([
                 {
+                    'id': '',
                     'nama_produk' : nama_produk,
                     'stok' : stok,
                     'harga' : harga,
