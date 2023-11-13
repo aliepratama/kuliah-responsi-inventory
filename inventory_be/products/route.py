@@ -8,7 +8,8 @@ def lists():
         return controller.add_product()
     elif request.method == 'GET':
         return controller.get_all_products()
-    return 'gagal'
+    else:
+        return 'gagal'
 
 @app.route('/products/<int:id>', methods=['GET', 'PATCH', 'DELETE'])
 def list(id: int):
@@ -18,4 +19,5 @@ def list(id: int):
         return controller.edit_product(id)
     elif request.method == 'DELETE':
         return controller.delete_product(id)
-    return 'gagal'
+    else:
+        return 'gagal'

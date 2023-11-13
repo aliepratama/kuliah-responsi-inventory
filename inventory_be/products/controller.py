@@ -27,6 +27,11 @@ def add_product():
                     'kategori' : kategori,
                 }
             ], 'Berhasil')
+        return response.bad_request([{
+            'message': 'Please check your data!',
+            'code': 35,
+            'field': ['nama_produk', 'stok', 'harga', 'deskripsi', 'kategori']
+        }])
     except Exception as e:
         print(e)
         return response.bad_request([{
@@ -48,10 +53,10 @@ def get_all_products():
         }])
         
 def get_product(id: int):
-    pass
+    return ''
         
 def edit_product(id: int):
-    pass
+    return ''
         
 def delete_product(id: int):
-    pass
+    return ''
