@@ -16,7 +16,7 @@ def get_all_categories():
                     'id': data[0],
                     'nama_kategori': data[1]
                 })
-        return response.ok(temp, 'Berhasil')
+            return response.ok(temp, 'Berhasil')
     except Exception as e:
         print(e)
         return response.bad_request([{
