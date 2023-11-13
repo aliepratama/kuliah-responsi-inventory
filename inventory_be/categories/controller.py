@@ -42,18 +42,18 @@ def add_category():
             result = Psql.cur.fetchone()
             print('DATA BEFORE>>>>>>>>>>', result)
             if result is None:
-                Psql.cur.execute("INSERT INTO categories (category_name) VALUES (%s)", (nama_kategori, ))
+                Psql.cur.execute("INSERT INTO categories (category_name) VALUES (%s) RETURNING id", (nama_kategori, ))
                 Psql.conn.commit()
-                Psql.cur.execute("SELECT * FROM categories WHERE category_name=%s", (nama_kategori, ))
-                result = Psql.cur.fetchone()[0]
+                result = Psql.cur.fetchone()
                 print('DATA>>>>>>>>>>', result)
                 Psql.conn.close()
-                return response.ok([
-                    {
-                        'id' : result,
-                        'nama_kategori': nama_kategori,
-                    }
-                ], 'Berhasil')
+                if result:
+                    return response.ok([
+                        {
+                            'id' : result[0],
+                            'nama_kategori': nama_kategori,
+                        }
+                    ], 'Berhasil')
             return response.bad_request([{
                 'message': 'Duplicate data!',
                 'code': 38,
@@ -86,7 +86,7 @@ def search_category(keyword: str):
                     'id': data[0],
                     'nama_kategori': data[1]
                 })
-        return response.ok(temp, 'Berhasil')
+            return response.ok(temp, 'Berhasil')
     except Exception as e:
         print(e)
         return response.bad_request([{
