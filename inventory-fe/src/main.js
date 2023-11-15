@@ -12,6 +12,7 @@ import Forms from './routes/Forms.vue'
 const router = createRouter({
     history: createWebHistory(),
     routes: [
+        { path: '/', component: Home },
         { path: '/home', component: Home },
         { path: '/products', component: Products },
         { path: '/form', component: Forms },
