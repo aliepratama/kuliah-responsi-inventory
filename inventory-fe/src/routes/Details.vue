@@ -1,6 +1,44 @@
 <script>
+import axios from "axios";
+
 export default {
-    props: ['id']
+    props: ['id'],
+    data(){
+        return {
+            categories: null,
+            nama_produk: null,
+            stok: null,
+            harga: null,
+            deskripsi: null,
+            kategori: null,
+        }
+    },
+    mounted(){
+        this.fetchData();
+    },
+    methods: {
+        fetchProduct(id){
+            axios.get(`http://127.0.0.1:5000/products/${id}`)
+            .then(res => {
+                let data = res.data.data;
+                this.nama_produk = data.nama_produk;
+                this.stok = data.stok;
+                this.harga = data.harga;
+                this.deskripsi = data.deskripsi;
+                this.kategori = this.categories
+                .filter((category) => category.id == data.kategori)
+                [0].nama_kategori;
+            })
+        },
+        fetchData(){
+            axios.get('http://127.0.0.1:5000/categories/lists')
+            .then(res => {
+                this.categories = res.data.data
+            }).then(() => {
+                this.fetchProduct(this.id);
+            })
+        },
+    }
 }
 </script>
 <template>
@@ -29,7 +67,7 @@ export default {
 
                         <div class="sm:col-span-9">
                             <span class="inline-block text-sm font-medium text-gray-500 mt-2.5">
-                                Nama Produk
+                                {{ nama_produk }}
                             </span>
                         </div>
                         <!-- End Col -->
@@ -43,7 +81,7 @@ export default {
 
                         <div class="sm:col-span-3">
                             <span class="inline-block text-sm font-medium text-gray-500 mt-2.5">
-                                Stok
+                                {{ stok }}
                             </span>
                         </div>
                         <!-- End Col -->
@@ -57,7 +95,7 @@ export default {
 
                         <div class="sm:col-span-3">
                             <span class="inline-block text-sm font-medium text-gray-500 mt-2.5">
-                                Harga
+                                {{ harga }}
                             </span>
                         </div>
                         <!-- End Col -->
@@ -69,7 +107,10 @@ export default {
                         </div>
                     <!-- End Col -->
                         <div class="sm:col-span-9">
-                            <textarea disabled id="textarea-label" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="3"></textarea>
+                            <textarea disabled 
+                            id="textarea-label" 
+                            v-model="deskripsi"
+                            class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="3"></textarea>
                         </div>
                         <!-- End Col -->
                         <div class="sm:col-span-3">
@@ -80,7 +121,7 @@ export default {
                     <!-- End Col -->
                         <div class="sm:col-span-9">
                             <span class="inline-block text-sm font-medium text-gray-500 mt-2.5">
-                                Kategori
+                                {{ kategori }}
                             </span>
                         </div>
                         <!-- End Col -->

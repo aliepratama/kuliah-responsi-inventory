@@ -19,7 +19,7 @@ export default {
         }
     },
     mounted(){
-        this.fetchCategories()
+        this.fetchData()
     },
     methods: {
         submitProduct(){
@@ -37,7 +37,7 @@ export default {
                 this.kategori = data.kategori;
             })
         },
-        fetchCategories(){
+        fetchData(){
             axios.get('http://127.0.0.1:5000/categories/lists')
             .then(res => {
                 this.categories = res.data.data

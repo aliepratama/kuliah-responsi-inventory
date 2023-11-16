@@ -12,14 +12,8 @@ export default{
                     path: '/products'
                 },
             ],
-            activeState: 'home',
             activeButton: 'text-blue-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600',
             defaultButton: 'text-gray-600 hover:text-gray-400 dark:text-gray-400 dark:hover:text-gray-500 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600',
-        }
-    },
-    methods: {
-        switchActive(menu){
-            this.activeState = menu;
         }
     },
 }
@@ -41,7 +35,7 @@ export default{
             </div>
             <div id="navbar-collapse-with-animation" class="hs-collapse hidden overflow-hidden transition-all duration-300 basis-full grow sm:block">
                 <div ref="listMenu" class="flex flex-col gap-5 mt-5 sm:flex-row sm:items-center sm:justify-end sm:mt-0 sm:ps-5">
-                    <router-link v-for="link in listButton" :key="link.name" :to="link.path" @click="switchActive(link.name)" :class="link.name === activeState ? activeButton : defaultButton">{{ link.name }}</router-link>
+                    <router-link v-for="link in listButton" :key="link.name" :to="link.path" :class="String($route.path).includes(String(link.name).toLowerCase()) ? activeButton : defaultButton">{{ link.name }}</router-link>
                 </div>
             </div>
         </nav>
