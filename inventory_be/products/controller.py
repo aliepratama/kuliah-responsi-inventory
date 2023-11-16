@@ -70,7 +70,7 @@ def get_all_products():
                     'deskripsi': data[5],
                     'kategori': data[6],
                 })
-            return response.ok(temp, 'Berhasil')
+        return response.ok(temp, 'Berhasil')
     except Exception as e:
         print(e)
         return response.bad_request([{
@@ -152,10 +152,15 @@ def edit_product(id: int):
 def delete_product(id: int):
     try:
         Psql.reconnect()
-        Psql.cur.execute("DELETE FROM products WHERE id=%s", (id, ))
-        Psql.conn.commit()
-        Psql.conn.close()
-        return response.success('Berhasil menghapus data!')
+        Psql.cur.execute("SELECT * FROM products")
+        result = Psql.cur.fetchall()
+        if len(result) > 0:
+            Psql.cur.execute("DELETE FROM products WHERE id=%s", (id, ))
+            Psql.conn.commit()
+            Psql.conn.close()
+            return response.success('Berhasil menghapus data!')
+        else:
+            return response.success('Data sudah kosong')
     except Exception as e:
         print(e)
         return response.bad_request([{
