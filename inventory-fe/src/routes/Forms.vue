@@ -1,14 +1,78 @@
 <script>
+import axios from "axios";
+
 export default {
     props: ['id'],
     data(){
         return {
+            categories: null,
+            nama_produk: null,
+            stok: null,
+            harga: null,
+            deskripsi: null,
+            kategori: null,
         }
     },
     computed: {
-        isCreate(){
+        isEdit(){
             return Boolean(this.id)
         }
+    },
+    mounted(){
+        this.fetchCategories()
+    },
+    methods: {
+        submitProduct(){
+            this.isEdit ? this.editProduct(this.id) : this.createProduct();
+            this.$router.push('/products');
+        },
+        fetchProduct(id){
+            axios.get(`http://127.0.0.1:5000/products/${id}`)
+            .then(res => {
+                let data = res.data.data;
+                this.nama_produk = data.nama_produk;
+                this.stok = data.stok;
+                this.harga = data.harga;
+                this.deskripsi = data.deskripsi;
+                this.kategori = data.kategori;
+            })
+        },
+        fetchCategories(){
+            axios.get('http://127.0.0.1:5000/categories/lists')
+            .then(res => {
+                this.categories = res.data.data
+            }).then(() => {
+                if(this.isEdit){
+                    this.fetchProduct(this.id);
+                }
+            })
+        },
+        createProduct(){
+            axios.post('http://127.0.0.1:5000/products/lists', {
+                nama_produk: this.nama_produk,
+                stok: this.stok,
+                harga: this.harga,
+                deskripsi: this.deskripsi,
+                kategori: this.kategori,
+            }, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(res => alert(res.data.message))
+        },
+        editProduct(id){
+            axios.patch(`http://127.0.0.1:5000/products/${id}`, {
+                nama_produk: this.nama_produk,
+                stok: this.stok,
+                harga: this.harga,
+                deskripsi: this.deskripsi,
+                kategori: this.kategori,
+            }, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(res => alert(res.data.message))
+        },
     }
 }
 </script>
@@ -38,7 +102,12 @@ export default {
                         <!-- End Col -->
 
                             <div class="sm:col-span-9">
-                                <input id="nama_produk" type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Tambahkan nama produk">
+                                <input
+                                    id="nama_produk"
+                                    type="text" 
+                                    class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                                    placeholder="Tambahkan nama produk"
+                                    v-model="nama_produk">
                             </div>
                             <!-- End Col -->
 
@@ -50,7 +119,12 @@ export default {
                         <!-- End Col -->
 
                             <div class="sm:col-span-3">
-                                <input id="stok" type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Tambahkan stok">
+                                <input 
+                                    id="stok" 
+                                    type="text" 
+                                    class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600"
+                                    placeholder="Tambahkan stok"
+                                    v-model="stok">
                             </div>
                             <!-- End Col -->
 
@@ -62,7 +136,12 @@ export default {
                         <!-- End Col -->
 
                             <div class="sm:col-span-3">
-                                <input id="harga" type="text" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" placeholder="Tambahkan harga">
+                                <input 
+                                id="harga" 
+                                type="text" 
+                                class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" 
+                                placeholder="Tambahkan harga"
+                                v-model="harga">
                             </div>
                             <!-- End Col -->
 
@@ -73,7 +152,11 @@ export default {
                             </div>
                         <!-- End Col -->
                             <div class="sm:col-span-9">
-                                <textarea id="textarea-label" class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="3" placeholder="Tambahkan deskripsi..."></textarea>
+                                <textarea 
+                                id="textarea-label" 
+                                class="py-2 px-3 pe-11 block w-full border-gray-200 shadow-sm text-sm rounded-lg focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600" rows="3" 
+                                placeholder="Tambahkan deskripsi..."
+                                v-model="deskripsi"></textarea>
                             </div>
                             <!-- End Col -->
                             <div class="sm:col-span-3">
@@ -83,18 +166,19 @@ export default {
                             </div>
                         <!-- End Col -->
                             <div class="sm:col-span-9">
-                                <select id="kategori" class="py-2 px-8 pe-12 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600 sm:p-4">
-                                    <option selected>Open this select menu</option>
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
+                                <select id="kategori" v-model="kategori" class="py-2 px-8 pe-12 block w-full border-gray-200 rounded-lg text-sm focus:border-blue-500 focus:ring-blue-500 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-gray-400 dark:focus:ring-gray-600 sm:p-4">
+                                    <option selected v-if="!isEdit">Pilih kategori</option>
+                                    <option v-for="category in categories" :key="category.id" :value="category.id" :selected="category.id == kategori">{{ category.nama_kategori }}</option>
                                 </select>
                             </div>
                             <!-- End Col -->
                         </div>
                         <div class="sm:col-span-12">
-                            <button type="button" class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
-                                {{isCreate ? 'Edit': 'Tambah'}} Produk
+                            <button 
+                                type="button" 
+                                @click="submitProduct()"
+                                class="w-full py-3 px-4 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600">
+                                {{isEdit ? 'Edit': 'Tambah'}} Produk
                             </button>
                         </div>
                     </form>
