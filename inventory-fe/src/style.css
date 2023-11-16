@@ -44,7 +44,7 @@ html {
   -o-tab-size: 4;
      tab-size: 4;
   /* 3 */
-  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-family: "Plus Jakarta Sans";
   /* 4 */
   font-feature-settings: normal;
   /* 5 */
@@ -534,6 +534,40 @@ video {
   --tw-backdrop-sepia:  ;
 }
 
+.container {
+  width: 100%;
+}
+
+@media (min-width: 640px) {
+  .container {
+    max-width: 640px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 768px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 1024px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1280px;
+  }
+}
+
+@media (min-width: 1536px) {
+  .container {
+    max-width: 1536px;
+  }
+}
+
 .collapse {
   visibility: collapse;
 }
@@ -787,6 +821,14 @@ video {
 
 .overflow-x-auto {
   overflow-x: auto;
+}
+
+.overflow-y-auto {
+  overflow-y: auto;
+}
+
+.overflow-y-scroll {
+  overflow-y: scroll;
 }
 
 .truncate {
@@ -1233,6 +1275,10 @@ video {
     gap: 1rem;
   }
 
+  .sm\:overflow-y-scroll {
+    overflow-y: scroll;
+  }
+
   .sm\:p-4 {
     padding: 1rem;
   }
@@ -1248,6 +1294,12 @@ video {
 
   .sm\:ps-5 {
     padding-inline-start: 1.25rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .md\:overflow-y-hidden {
+    overflow-y: hidden;
   }
 }
 

@@ -23,8 +23,8 @@ export default{
         <nav class="max-w-[85rem] w-full mx-auto px-4 sm:flex sm:items-center sm:justify-between" aria-label="Global">
             <div class="flex items-center justify-between">
                 <router-link to="/home" class="flex flex-col justify-start items-start">
-                    <span class="flex-none text-xl font-semibold dark:text-white" href="#">Inventory.</span>
-                    <span class="dark:text-white text-xs">Alie Pratama</span>
+                    <span class="flex-none text-xl font-extrabold dark:text-white" href="#">Inventory.</span>
+                    <span class="dark:text-white text-xs">by Alie Pratama</span>
                 </router-link>
                 <div class="sm:hidden">
                     <button type="button" class="hs-collapse-toggle p-2 inline-flex justify-center items-center gap-x-2 rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-transparent dark:border-gray-700 dark:text-white dark:hover:bg-white/10 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600" data-hs-collapse="#navbar-collapse-with-animation" aria-controls="navbar-collapse-with-animation" aria-label="Toggle navigation">
