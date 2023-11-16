@@ -26,16 +26,19 @@ const router = createRouter({
             component: Products 
         },
         { 
+            name: 'Create',
             path: '/form', 
             component: Forms 
         },
         { 
+            name: 'Details',
             path: '/details/:id', 
             component: Details, 
             props: true 
         },
         { 
-            path: '/edit/:id', 
+            name: 'Edit',
+            path: '/edit/:id',
             component: Forms, 
             props: true 
         },
