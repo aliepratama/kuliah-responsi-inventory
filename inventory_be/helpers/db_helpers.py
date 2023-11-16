@@ -7,7 +7,7 @@ class PsqlApp:
             host='localhost',
             port='5432',
             user='aliepratama',
-            password='Aw!kw0k000',
+            password='password',
         )
 
         self.cur = self.conn.cursor()
@@ -18,7 +18,7 @@ class PsqlApp:
             host='localhost',
             port='5432',
             user='aliepratama',
-            password='Aw!kw0k000',
+            password='password',
         )
         self.cur = self.conn.cursor()
 
