@@ -671,6 +671,18 @@ video {
   margin-top: 2rem;
 }
 
+.mt-20 {
+  margin-top: 5rem;
+}
+
+.mt-10 {
+  margin-top: 2.5rem;
+}
+
+.mt-16 {
+  margin-top: 4rem;
+}
+
 .block {
   display: block;
 }
@@ -745,6 +757,22 @@ video {
 
 .max-w-\[85rem\] {
   max-width: 85rem;
+}
+
+.max-w-xs {
+  max-width: 20rem;
+}
+
+.max-w-\[2rem\] {
+  max-width: 2rem;
+}
+
+.max-w-\[6rem\] {
+  max-width: 6rem;
+}
+
+.max-w-\[5rem\] {
+  max-width: 5rem;
 }
 
 .flex-none {
@@ -972,12 +1000,31 @@ video {
   padding-bottom: 2rem;
 }
 
+.px-12 {
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+.px-24 {
+  padding-left: 6rem;
+  padding-right: 6rem;
+}
+
+.px-36 {
+  padding-left: 9rem;
+  padding-right: 9rem;
+}
+
 .pe-11 {
   padding-inline-end: 2.75rem;
 }
 
 .pe-12 {
   padding-inline-end: 3rem;
+}
+
+.text-center {
+  text-align: center;
 }
 
 .text-start {
@@ -1310,8 +1357,44 @@ video {
 }
 
 @media (min-width: 768px) {
+  .md\:mt-2 {
+    margin-top: 0.5rem;
+  }
+
+  .md\:mt-0 {
+    margin-top: 0px;
+  }
+
+  .md\:block {
+    display: block;
+  }
+
+  .md\:hidden {
+    display: none;
+  }
+
+  .md\:flex-row {
+    flex-direction: row;
+  }
+
+  .md\:flex-col {
+    flex-direction: column;
+  }
+
+  .md\:items-start {
+    align-items: flex-start;
+  }
+
+  .md\:justify-between {
+    justify-content: space-between;
+  }
+
   .md\:overflow-y-hidden {
     overflow-y: hidden;
+  }
+
+  .md\:text-left {
+    text-align: left;
   }
 }
 
